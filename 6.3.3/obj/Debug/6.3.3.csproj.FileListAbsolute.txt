@@ -1,0 +1,7 @@
+C:\ВУЗ\Прога\6_lab\6.3.3\bin\Debug\6.3.3.exe.config
+C:\ВУЗ\Прога\6_lab\6.3.3\bin\Debug\6.3.3.exe
+C:\ВУЗ\Прога\6_lab\6.3.3\bin\Debug\6.3.3.pdb
+C:\ВУЗ\Прога\6_lab\6.3.3\obj\Debug\6.3.3.csproj.AssemblyReference.cache
+C:\ВУЗ\Прога\6_lab\6.3.3\obj\Debug\6.3.3.csproj.CoreCompileInputs.cache
+C:\ВУЗ\Прога\6_lab\6.3.3\obj\Debug\6.3.3.exe
+C:\ВУЗ\Прога\6_lab\6.3.3\obj\Debug\6.3.3.pdb

@@ -6,8 +6,9 @@ class Program
 {
     struct Team
     {
-        public string Name { get; set; }
-        public int[] Scores { get; set; }
+        public string Name { get; }
+        public int[] Scores { get; }
+        public int TotalScore { get; }
 
         public Team(string name, int[] scores)
         {

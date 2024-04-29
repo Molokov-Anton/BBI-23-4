@@ -5,15 +5,20 @@ class Program
 {
     struct Student
     {
-        public string Name { get; set; }
-        public int Score { get; set; }
-        public int MissedLessons { get; set; }
+        public string Name { get; }
+        public int Score { get; }
+        public int MissedLessons { get; }
 
         public Student(string name, int score, int missedLessons)
         {
             Name = name;
             Score = score;
             MissedLessons = missedLessons;
+        }
+
+        public void PrintDetails()
+        {
+            Console.WriteLine($"{Name} - пропустил {MissedLessons} занятий");
         }
     }
 
@@ -29,7 +34,7 @@ class Program
             new Student("Дмитрий", 2, 4)
         };
 
-        // Фильтрация студентов с оценкой 2
+        
         List<Student> failedStudents = new List<Student>();
         foreach (var student in students)
         {
@@ -39,13 +44,13 @@ class Program
             }
         }
 
-        // Сортировка по количеству пропущенных занятий в порядке убывания
+        
         failedStudents.Sort((x, y) => y.MissedLessons.CompareTo(x.MissedLessons));
 
-        // Вывод результатов
+        
         foreach (var student in failedStudents)
         {
-            Console.WriteLine($"{student.Name} - пропустил {student.MissedLessons} занятий");
+            student.PrintDetails();
         }
     }
 }

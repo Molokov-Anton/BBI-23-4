@@ -76,4 +76,4 @@ class Program
         Console.WriteLine($"Победитель: {winner.Name} с общим количеством баллов: {maxScore}");
     }
 }
-
+ 

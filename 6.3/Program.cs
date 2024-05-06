@@ -2,64 +2,78 @@
 using System.Collections.Generic;
 using System.Linq;
 
-class Program
+public class Team
 {
-    struct Team
+    public string Name { get; set; }
+    public List<int> SportsmensRes { get; set; }
+
+    public Team(string name, List<int> sportsmenRes)
     {
-        public string Name { get; }
-        public int[] Scores { get; }
-        public int TotalScore { get; }
-        public int Rank { get; set; }
-
-        public Team(string name, int[] scores)
-        {
-            Name = name;
-            Scores = scores;
-            TotalScore = CalculateTotalScore(scores);
-            Rank = 0;
-        }
-
-        private static int CalculateTotalScore(int[] scores)
-        {
-            return scores.Select((score, index) => score * (18 - index)).Sum();
-        }
-
-        public void PrintDetails()
-        {
-            Console.WriteLine($"Команда: {Name}, Место: {Rank}, Общее количество баллов: {TotalScore}");
-        }
-
-        public void PrintParticipants()
-        {
-            Console.WriteLine($"Участники команды {Name}:");
-            for (int i = 0; i < Scores.Length; i++)
-            {
-                Console.WriteLine($"Место: {Scores[i]}, Участник: {i + 1}");
-            }
-        }
+        Name = name;
+        SportsmensRes = sportsmenRes;
     }
 
+    public int CalculateScore()
+    {
+        int score = 0;
+        foreach (var place in SportsmensRes)
+        {
+            switch (place)
+            {
+                case 1:
+                    score += 5;
+                    break;
+                case 2:
+                    score += 4;
+                    break;
+                case 3:
+                    score += 3;
+                    break;
+                case 4:
+                    score += 2;
+                    break;
+                case 5:
+                    score += 1;
+                    break;
+            }
+        }
+        return score;
+    }
+
+    public int CountFirstPlace()
+    {
+        return SportsmensRes.Count(place => place == 1);
+    }
+}
+
+class Program
+{
     static void Main(string[] args)
     {
         List<Team> teams = new List<Team>
         {
-            new Team("Команда A", new int[] { 1, 2, 3, 4, 5, 6 }),
-            new Team("Команда B", new int[] { 2, 3, 4, 5, 6, 1 }),
-            new Team("Команда C", new int[] { 3, 4, 5, 6, 1, 2 })
+            new Team("Team1", new List<int> {  1,  5,  7,  12,  13,  16 }),
+            new Team("Team2", new List<int> {  2,  6,  8,  11,  14,  17 }),
+            new Team("Team3", new List<int> {  2,  4,  9,  10,  15,  18 })
         };
 
-        var sortedTeams = teams.OrderByDescending(t => t.TotalScore).ToList();
+        Team winner = null;
+        int maxScore = 0;
+        int maxFirstPlace = 0;
 
-        List<Team> rankedTeams = new List<Team>();
-        for (int i = 0; i < sortedTeams.Count; i++)
+        foreach (var team in teams)
         {
-            rankedTeams.Add(new Team(sortedTeams[i].Name, sortedTeams[i].Scores) { Rank = i + 1 });
+            int teamScore = team.CalculateScore();
+            int teamFirstPlace = team.CountFirstPlace();
+            if (teamScore > maxScore || (teamScore == maxScore && teamFirstPlace > maxFirstPlace))
+            {
+                maxScore = teamScore;
+                maxFirstPlace = teamFirstPlace;
+                winner = team;
+            }
         }
 
-        foreach (var team in rankedTeams)
-        {
-            team.PrintDetails();
-            team.PrintParticipants();
-        }
+        Console.WriteLine($"Победитель: {winner.Name} с общим количеством баллов: {maxScore}");
     }
 }
+
